@@ -2,8 +2,9 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListView, FlatList, View, Text } from 'react-native';
-import { employeesFetch } from '../actions';
-import {Icon, Header, Left, Button, Body, Title, Fab} from 'native-base'
+import { employeesFetch } from '../../actions/index';
+import {Icon, Header, Left, Button as NBButton, Body, Title, Fab} from 'native-base'
+import {Actions} from "react-native-router-flux";
 
 class MinhasReservas extends Component {
     render () {
@@ -11,7 +12,18 @@ class MinhasReservas extends Component {
             <View style={{ flex: 1 }}>
                 <Header style={{backgroundColor: '#007aff'}} androidStatusBarColor= '#007aff'>
                     <Left>
-                        <Icon name='menu' style={{color:'white'}} />
+                        <NBButton
+                            transparent
+                            //light
+                            style={{ alignItems: 'center', justifyContent: 'flex-start' }}
+                            //onPress={() => this.props.navigation.navigate("DrawerOpen")}
+                            onPress={() => {
+                                console.log("Drawer Aberto!");
+                                Actions.drawerOpen();
+                            }}
+                        >
+                            <Icon name='menu' style={{color:'white'}} />
+                        </NBButton>
                     </Left>
                     <Body style={{ flex: 1}}>
                         <Title style={{color: 'white'}}>Minhas Reservas</Title>

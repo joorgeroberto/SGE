@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import Styles from "./LoginFormStyle";
+import { Actions } from 'react-native-router-flux';
+import Styles from "./Styles/LoginFormStyle";
 import {Body, Header, Icon, Left, Title} from 'native-base';
-import { emailChanged, passwordChanged, loginUser } from "../actions";
-import {Card, CardSection, Input, Button, Spinner} from './common';
+import { emailChanged, passwordChanged, loginUser } from "../../actions/index";
+import {Card, CardSection, Input, Button, Spinner} from '../presentationComponents/index';
 
 class LoginScreen extends Component {
     onEmailChange(text) {
@@ -25,7 +26,7 @@ class LoginScreen extends Component {
         if(this.props.error) {
             return (
                 <View style={{backgroundColor: 'white'}}>
-                    <Text style={styles.errorTextStyle}>
+                    <Text style={[Styles.errorTextStyle]}>
                         {this.props.error}
                     </Text>
                 </View>
@@ -50,7 +51,7 @@ class LoginScreen extends Component {
                         </Button>
                     </CardSection>
                     <CardSection style={{flex: 1}}>
-                        <Button>
+                        <Button onPress={() => {Actions.telaDeCadastro()}}>
                             Cadastrar
                         </Button>
                     </CardSection>
@@ -103,13 +104,7 @@ class LoginScreen extends Component {
     }
 }
 
-const styles = {
-    errorTextStyle: {
-        fontSize: 20,
-        alignSelf: 'center',
-        color: 'red'
-    }
-};
+
 
 const mapStateToProps = (state) => {
     const { email, password, user, error, loading } = state.auth;

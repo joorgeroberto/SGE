@@ -23,6 +23,7 @@ export const passwordChanged = (text) => {
     };
 };
 
+
 //action que fará o login de forma assíncrona
 export const loginUser = ({ email, password }) => {
     return (dispatch) => {

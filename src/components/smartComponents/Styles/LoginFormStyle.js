@@ -16,5 +16,10 @@ export default StyleSheet.create({
         //justifyContent: 'center',
         //alignItems: 'center',
         //marginTop: 10
+    },
+    errorTextStyle: {
+        fontSize: 20,
+        alignSelf: 'center',
+        color: 'red'
     }
 })
