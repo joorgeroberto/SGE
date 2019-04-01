@@ -9,7 +9,8 @@ import {
 } from 'react-native'
 import {Actions, ActionConst} from "react-native-router-flux";
 import PropTypes from 'prop-types';
-
+import { connect } from 'react-redux';
+import { verifyCurrentUserLevel } from "../../actions/index";
 import { List, ListItem, Content, Accordion, Left, Right, Body } from "native-base";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ItemDrawer from './ItemDrawer';
@@ -41,6 +42,7 @@ class DrawerContent extends Component {
     };
 
     componentWillMount() {
+        this.props.verifyCurrentUserLevel();
         Keyboard.dismiss();
         //this.setState({ items: this.props.items });
         //console.log(this.state.items);
@@ -51,10 +53,14 @@ class DrawerContent extends Component {
     }
 
     renderAdminList() {
-        const valor = 1;
-        if(valor === 1) {
+        if(this.props.currentUserLevel === 0) {
             return(
-                <ItemDrawer name="Adicionar Locais" navigation={() => Actions.adicionarLocais()} fontWei='bold'/>
+                <View>
+                    <ItemDrawer name="Adicionar Local" navigation={() => Actions.adicionarLocais()} fontWei='bold'/>
+                    <ItemDrawer name="Adicionar Recurso" navigation={() => Actions.adicionarRecurso()} fontWei='bold'/>
+                    <ItemDrawer name="Selecionar Sala" navigation={() => Actions.selecionarSala()} fontWei='bold'/>
+
+                </View>
             );
         }
     }
@@ -64,7 +70,7 @@ class DrawerContent extends Component {
 
         return (
             <View style={styles.container}>
-                <View style={{paddingBottom: 20, paddingTop: 10, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: '#007aff'}}>
+                <View style={{paddingBottom: 20, paddingTop: 25, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: '#007aff'}}>
                     <Image source={require('../../logoUfs.png')} style={styles.logo} />
                 </View>
                 <Content>
@@ -79,4 +85,10 @@ class DrawerContent extends Component {
     }
 }
 
-export default DrawerContent;
+const mapStateToProps = (state) => {
+    const { currentUserLevel } = state.auth;
+
+    return { currentUserLevel };
+};
+
+export default connect(mapStateToProps, { verifyCurrentUserLevel })(DrawerContent);

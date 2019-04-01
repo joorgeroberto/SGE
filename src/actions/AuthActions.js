@@ -6,7 +6,8 @@ import {
     PASSWORD_CHANGED,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
-    LOGIN_USER
+    LOGIN_USER,
+    CURRENT_USER_LEVEL
 } from "./types";
 
 export const emailChanged = (text) => {
@@ -23,6 +24,16 @@ export const passwordChanged = (text) => {
     };
 };
 
+export const verifyCurrentUserLevel = () => {
+    const { currentUser } = firebase.auth();
+    return(dispatch) => {
+        console.log(currentUser);
+        firebase.database().ref(`/usuarios/${currentUser.uid}/tipo_usuario`)
+            .on('value', (snapshot) => {
+                dispatch({ type: CURRENT_USER_LEVEL, payload: snapshot.val() })
+            })
+    }
+};
 
 //action que fará o login de forma assíncrona
 export const loginUser = ({ email, password }) => {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import Styles from "./Styles/TelaDeCadastroStyle";
-import {Body, Header, Icon, Left, Title, Button as NBButton} from 'native-base';
+import {Body, Header, Icon, Left, Right, Title, Button as NBButton} from 'native-base';
 import { userUpdate, createUser } from "../../actions/index";
 import {Card, CardSection, Input, Spinner, Button as CMButton} from '../presentationComponents/index';
 import { Actions } from 'react-native-router-flux';
@@ -22,6 +22,16 @@ class TelaDeCadastro extends Component {
                 </View>
             );
         }
+    }
+    renderRight() {
+        if(Platform.OS !== 'android') {
+            return(
+                <Right/>
+            );
+        }
+        else
+            return(<Right/>)
+
     }
     renderButton() {
         if(this.props.loading) {
@@ -48,20 +58,24 @@ class TelaDeCadastro extends Component {
         return(
             <View>
                 <Header style={{backgroundColor: '#007aff'}} androidStatusBarColor= '#007aff'>
-                    <Left>
-                        <NBButton
-                            transparent
-                            //light
-                            style={{ alignItems: 'center', justifyContent: 'flex-start' }}
-                            //onPress={() => this.props.navigation.navigate("DrawerOpen")}
-                            onPress={() => { Actions.pop() }}
-                        >
-                            <Icon name='arrow-back' style={{color:'white'}} />
-                        </NBButton>
-                    </Left>
-                    <Body style={{ flex: 1, justifyContent: 'center'}}>
-                        <Title style={{color: 'white'}}>Cadastro</Title>
-                    </Body>
+
+                        <Left>
+                            <NBButton
+                                transparent
+                                //light
+                                style={{ alignItems: 'center', justifyContent: 'flex-start' }}
+                                //onPress={() => this.props.navigation.navigate("DrawerOpen")}
+                                onPress={() => { Actions.pop() }}
+                            >
+                                <Icon name='arrow-back' style={{color:'white'}} />
+                            </NBButton>
+                        </Left>
+                        <Body style={{  backgroundColor: '', justifyContent: 'center', alignItems: 'center'}}>
+                            <Title style={{color: 'white'}}>Cadastro</Title>
+                        </Body>
+                        { this.renderRight() }
+                        {/**/}
+
                 </Header>
                 <Card>
                     <CardSection>
@@ -85,8 +99,8 @@ class TelaDeCadastro extends Component {
                     <CardSection>
                         <Input
                             secureTextEntry
-                            label="Password"
-                            placeholder="password"
+                            label="Senha"
+                            placeholder="********"
                             onChangeText={(text) => this.props.userUpdate({ prop: 'password', value: text })}
                             value={this.props.password}
                         />

@@ -7,60 +7,44 @@ import {
 } from 'react-native';
 import firebase from 'firebase'
 import {Actions} from 'react-native-router-flux';
-import RNFetchBlob from 'react-native-fetch-blob'
 import CameraRollPicker from 'react-native-camera-roll-picker'
 import {PermissionsAndroid} from 'react-native';
+import {Body, Header, Icon, Left, Button as NBButton, Right, Title} from "native-base";
+import { connect } from 'react-redux';
+import { uploadImage, getSelectedImages } from "../../actions/index";
 
-export default class Gallery extends Component {
+class Gallery extends Component {
     getSelectedImages = (selectedImages, currentImage) => {
-
-        console.log('Aqui');
-        const image = currentImage.uri;
-        console.log(image);
-        const { currentUser } = firebase.auth();
-        const Blob = RNFetchBlob.polyfill.Blob;
-        const fs = RNFetchBlob.fs;
-        window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-        window.Blob = Blob;
-
-
-        let uploadBlob = null;
-        //const imageRef = firebase.storage().ref('posts').child("test.jpg");
-        const imageRef = firebase.storage().ref(`/locais/`);
-        //firebase.database().ref(`/users/${currentUser.uid}/employees`);
-        console.log(imageRef);
-        let mime = 'image/jpg';
-        fs.readFile(image, 'base64')
-            .then((data) => {
-
-                return Blob.build(data, { type: `${mime};BASE64` })
-            })
-            .then((blob) => {
-                uploadBlob = blob;
-                return imageRef.put(blob, { contentType: mime })
-            })
-            .then(() => {
-                uploadBlob.close();
-                return imageRef.getDownloadURL()
-            })
-            .then((url) => {
-                // URL of the image uploaded on Firebase storage
-                console.log(url);
-                Actions.adicionarLocais();
-
-            })
-            .catch((error) => {
-                console.log(error);
-
-            })
-
+        this.props.getSelectedImages({selectedImages, currentImage});
     };
-    myImages() {
 
-    }
     render() {
         return (
-            <CameraRollPicker selected={[]} maximum={1} callback={this.getSelectedImages.bind(this)} />
+            <View style={{flex: 1}}>
+                <Header style={{backgroundColor: '#007aff'}} androidStatusBarColor= '#007aff'>
+                    <Left
+                        //style={{ flex: 0.8, backgroundColor:''}}
+                    >
+                        <NBButton
+                            transparent
+                            //light
+                            style={{ alignItems: 'center', justifyContent: 'flex-start' }}
+                            //onPress={() => this.props.navigation.navigate("DrawerOpen")}
+                            onPress={() => { Actions.pop() }}
+                        >
+                            <Icon name='arrow-back' style={{color:'white'}} />
+                        </NBButton>
+                    </Left>
+                    <Body
+                        //style={{ alignItems: 'flex-start',justifyContent: 'center'}}
+                        style={{backgroundColor:'', flex: 1, alignItems: 'center',justifyContent: 'center'}}
+                    >
+                        <Title style={{color: 'white'}}>Galeria</Title>
+                    </Body>
+                    <Right/>
+                </Header>
+                <CameraRollPicker selected={[]} maximum={1} callback={this.getSelectedImages.bind(this)} />
+            </View>
 
         );
     }
@@ -79,3 +63,13 @@ const styles = StyleSheet.create({
         margin: 10,
     }
 });
+
+const mapStateToProps = (state) => {
+    const { imageName } = state.addPlace;
+
+    return ({
+        imageName: imageName
+    });
+};
+
+export default connect(mapStateToProps, { uploadImage, getSelectedImages }) (Gallery);

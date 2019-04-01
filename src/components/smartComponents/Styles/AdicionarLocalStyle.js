@@ -1,3 +1,5 @@
+import metrics from '../../../Metrics';
+
 export default {
     container: {
         flex: 1,
@@ -6,29 +8,35 @@ export default {
         backgroundColor: '#fff'
     },
     image: {
-        width: 300,
-        height: 200,
+        width: (metrics.screenWidth)-40,
+        height: (metrics.screenHeight)*(2/5),
+        //backgroundColor: 'red',
+        //flexDirection: 'row',
         //flex: 1,
-        //alignItems: 'center', justifyContent: 'flex-start',
-        resizeMode: 'stretch',
-        //paddingLeft: 5
+        alignContent: 'center',
+        justifyContent: 'center',
+        //resizeMode: 'stretch',
+        resizeMode: 'contain',
+        paddingLeft: 20,
         //backgroundColor: 'red'
     },
     nbButton: {
-        width: 300,
-        height: 200,
+        width: (metrics.screenWidth)-40,
+        height: (metrics.screenHeight)*(2/5),
         //flex: 1,
-        //resizeMode: 'contain',
-        paddingLeft: 30,
-        //backgroundColor: 'red'
+        resizeMode: 'contain',
+        paddingLeft: 20,
+        //paddingRight: 30,
+        backgroundColor: ''
     },
     button: {
+        flex: 0.08,
         paddingBottom: 5,
         paddingHorizontal: 0,
         flexDirection: 'row',
         //flex: 1,
-        //justifyContent: 'center',
-        //alignItems: 'center',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
         //marginTop: 10
     },
 }

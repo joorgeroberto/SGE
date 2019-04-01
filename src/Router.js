@@ -8,6 +8,9 @@ import TelaDeCadastro from './components/smartComponents/TelaDeCadastro';
 import DrawerContent from './components/presentationComponents/DrawerContent';
 import AdicionarLocal from './components/smartComponents/AdicionarLocal';
 import Gallery from './components/smartComponents/Gallery';
+import AdicionarRecurso from './components/smartComponents/AdicionarRecurso';
+import SelecionarSala from './components/smartComponents/SelecionarSala';
+import CriarEvento from './components/smartComponents/CriarEvento';
 
 const RouterComponent = () => {
     return (
@@ -52,6 +55,24 @@ const RouterComponent = () => {
                             key="adicionarLocais"
                             component={AdicionarLocal}
                             title="Adicionar Locais"
+                            hideNavBar
+                        />
+                        <Scene
+                            key="adicionarRecurso"
+                            component={AdicionarRecurso}
+                            title="Adicionar Recurso"
+                            hideNavBar
+                        />
+                        <Scene
+                            key="selecionarSala"
+                            component={SelecionarSala}
+                            title="Selecionar Sala"
+                            hideNavBar
+                        />
+                        <Scene
+                            key="criarEvento"
+                            component={CriarEvento}
+                            title="Criar Evento"
                             hideNavBar
                         />
                         <Scene

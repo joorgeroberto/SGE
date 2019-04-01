@@ -5,7 +5,8 @@ import {
     PASSWORD_CHANGED,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
-    LOGIN_USER
+    LOGIN_USER,
+    CURRENT_USER_LEVEL
 } from "../actions/types";
 
 //Email inicial. Se a pessoa não enviar nada, ele retorna uma string vazia.
@@ -14,7 +15,8 @@ const INITIAL_STATE = {
     password: '',
     error: '',
     user: null,
-    loading: false
+    loading: false,
+    currentUserLevel: 2
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -37,6 +39,8 @@ export default (state = INITIAL_STATE, action) => {
 
             //Para diminuir a quantidade de códigos, colocaremos o estado inicial e só midificamos o que precisar.
             return ({ ...state, ...INITIAL_STATE, user: action.payload });
+        case(CURRENT_USER_LEVEL):
+            return({ ...state, currentUserLevel: action.payload});
         case (LOGIN_USER_FAIL):
             return ({ ...state, error: "Login ou senha inválidos.", loading: false, email: '', password: '' });
         default:

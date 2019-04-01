@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Styles from "./Styles/LoginFormStyle";
-import {Body, Header, Icon, Left, Title} from 'native-base';
+import {Body, Header, Icon, Left, Title, Right} from 'native-base';
 import { emailChanged, passwordChanged, loginUser } from "../../actions/index";
 import {Card, CardSection, Input, Button, Spinner} from '../presentationComponents/index';
 
@@ -85,8 +85,8 @@ class LoginScreen extends Component {
                     <CardSection>
                         <Input
                             secureTextEntry
-                            label="Password"
-                            placeholder="password"
+                            label="Senha"
+                            placeholder="********"
                             onChangeText={this.onPasswordChange.bind(this)}
                             value={this.props.password}
                         />
