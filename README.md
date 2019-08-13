@@ -23,9 +23,8 @@ Sistema de Gerenciamento de Eventos - SGE
   Inicialmente, utilizaremos Firebase neste projeto. Este é um Bando de Dados noSQL onde os dados são representados em JSON. Posteriormente podemos integrar esta aplicação com o Sigaa.
   
   O Sistema possui 3 tipos de usuário:
-  
-  ![alt tag](https://github.com/joorgeroberto/SGE/blob/master/Users_SGE.jpeg "Tipos de Usuário")
-  
+  ![alt tag](https://github.com/joorgeroberto/SGE/blob/master/Users_SGE.jpeg "Tipos de Usuário - Parte 1")
+  ![alt tag](https://github.com/joorgeroberto/SGE/blob/master/Users2_SGE.png "Tipos de Usuário - Parte 2")
   # Hardware: 
   O sistema roda em Smartphones com Sistemas Operacionais:
    - Android 4.4 ou superior.
