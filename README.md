@@ -25,7 +25,15 @@ Sistema de Gerenciamento de Eventos - SGE
   O Sistema possui 3 tipos de usuário:
   ![alt tag](https://github.com/joorgeroberto/SGE/blob/master/Users_SGE.jpeg "Tipos de Usuário - Parte 1")
   ![alt tag](https://github.com/joorgeroberto/SGE/blob/master/Users2_SGE.png "Tipos de Usuário - Parte 2")
-  # Hardware: 
+
+# Hardware: 
   O sistema roda em Smartphones com Sistemas Operacionais:
    - Android 4.4 ou superior.
    - Ios 9.0 ou superior.
+   
+# To Do:
+ - Corrigir bug de notificação ao criar evento (Se encontra nos reducers)
+ - Listar todos os eventos cadastrados.
+ - Cancelar evento.
+ - Disponibilizar e Indisponibilizar recursos.
+   
